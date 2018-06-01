@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+		{% load static %}
+	<head>
+		<link rel='stylesheet' href="{% static 'my_wishlist/style.css' %}">
+
+		<title>Users</title>
+	</head>
+	<body>
+
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+	   <h1>Success! Welcome,{{user.user_name}}</h1>
+       <a href="/logout">logout</a>
+	   <h2>~Your Wish List~</h2>
+	   <!-- {% for item in my_current_wishlist%}
+	   <table>
+		   <tr>
+			   <th>
+				   Item
+			   </th>
+			   <th>
+				   Added by
+			   </th>
+			   <th>
+				   Date Added
+			   </th>
+			   <th>
+				   Action
+			   </th>
+		   </tr>
+		   <tr>
+			   <!-- <a href="/item/{{item.id}}">{{item.item_name}}</a> -->
+		   <!-- </tr>
+		   <tr>
+			   {{}}
+		   </tr>
+
+
+
+
+
+
+
+
+
+
+	   </table>
+	   {% endfor %}
+       
+
+
+
+
+
+
+       <a href="/add">Add Item</a>
+    </body>
+</html>

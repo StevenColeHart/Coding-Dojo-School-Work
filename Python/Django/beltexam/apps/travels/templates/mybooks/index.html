@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Welcome!</p>
+    <div>
+        <h2>Registration</h2>
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            Name: <input type="text" name="name">
+            Username: <input type="text" name="username">
+            Password: <input type="text" name="password">
+            Confirmation: <input type="text" name="confirmation">
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <div>
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            Username: <input type="text" name="username">
+            Password: <input type="text" name="password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+from django.conf.urls import url, include
+from . import views           # This line is new!
+urlpatterns = [
+    url(r'^$', views.index),    
+    url(r'^login$', views.login),
+    url(r'^register$', views.register),
+    url(r'^success$', views.success),
+    url(r'^newappointment$', views.newappointment),
+    url(r'^logout$', views.logout),
+
+]

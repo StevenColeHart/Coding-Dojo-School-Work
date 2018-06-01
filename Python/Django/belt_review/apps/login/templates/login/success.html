@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+		{% load static %}
+	<head>
+		<link rel='stylesheet' href="{% static 'login/style.css' %}">
+
+		<title>Users</title>
+	</head>
+	<body>
+
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+	   <h1>Success! Welcome,{{user.first_name}}</h1>
+	   <a href="/add">add</a>
+	   <a href="/logout">logout</a>
+	
+	   <h3>add a new Course</h3>
+	   <form action="/new" method='POST'>
+		{% csrf_token %}
+	   <!-- ^^^action is going to go tothe urls.py page which will direct it to the controler new in the views.py -->
+	   Course Name:<input type="text" name="course_name">
+	   Description:<input type="text" name="course_description">
+	   <input type="submit" value="add">
+	</form>	
+	{% if user.courses.all %}
+	<!-- list all courses that the user is enrolled  in -->
+	<h3>Enrolled Courses:</h3>
+	<div class="login">
+	<table>
+		<tr>
+			<th>Course Name</th>
+			<th>Course Description</th>
+			<th>Action</th>
+		</tr>
+		{% for course in user.courses.all %}
+		
+		<tr>
+			<td><a href="/course/{{course.id}}">{{course.name}}</a></td>
+			<td>{{ course.description }}</td>
+			<td><a href="/drop/{{course.id}}">drop</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+		{% if courses %}
+	</div>
+	
+	<h3>Courses</h3>
+	<table>
+		<tr>
+			<th>
+				<!-- th means table header -->
+				Course Name
+			
+			</th>
+			<th>
+				Description
+			</th>
+			<th>
+				Date Added
+			</th>
+			<th>
+				Actions
+			</th>
+		</tr>
+
+			{% for course in courses %}
+			<!-- ***one curly brackets is to do python logic** -->
+			<!-- ************** -->
+			<!-- courses is the list of all the information in the course models database 
+				which we connected in the def success controller function in views in context -->
+			<!-- *********************** -->
+			<tr>
+				<td>
+					<!-- td is table data inside the tabe -->
+					<a href="/course/{{course.id}}">{{course.name}}</a>
+					<!-- could also be "/course/{}".format(course.id) -->
+					<!-- ************** -->
+					<!-- /course <--is the url  while course.id<--- is going to be pulled from the address bar  -->
+					<!-- ***two curly brackets is to print out a varable** -->
+					<!-- ^^ course.name points to the model course with the data field name. -->
+
+				</td>
+				<td>
+					{{course.description}}
+				</td>
+				<td>
+					{{course.created_at}}
+					<!-- ^^^^in the wireframe its Date Added but in course,created_at this is where we get the date -->
+
+				</td>
+				<td>
+					<a href="/join/{{course.id}}">join</a>
+				</td>
+			</tr>
+			{% endfor %}
+			
+			<!-- here your gonna make a forloop to go through  -->
+	</table>
+	{%endif%}
+	
+
+    </body>
+</html>

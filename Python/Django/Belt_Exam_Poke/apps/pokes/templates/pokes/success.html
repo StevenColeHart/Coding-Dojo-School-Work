@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+		{% load static %}
+	<head>
+		<link rel='stylesheet' href="{% static 'pokes/style.css' %}">
+
+		<title>Pokes</title>
+	</head>
+	<body>
+
+	   <h1>Welcome, {{user.alias}}!</h1>
+	   <a href="/logout">logout</a>
+
+	   <h2>
+		<table>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					aka
+				</th>
+				<th>
+					Email Address
+				</th>
+				<th>
+					Poke History
+				</th>
+				<th>
+					Action
+				</th>
+			</tr>
+			<tr>
+
+		{% for user in users%}
+		<tr>
+			<td>
+				{{user.name}}
+			</td>
+			<td>
+				{{user.alias}}
+			</td>
+			<td>
+				{{user.email}}
+			</td>
+			<td>
+
+			</td>
+			<td>
+				<form action="/poke{{user.id}}" method="POST">
+					<input type="submit" value="poke">
+				
+				</form>
+			</td>
+		{% endfor %}
+		</tr>
+		</table>
+	   </h2>
+    </body>
+</html>
